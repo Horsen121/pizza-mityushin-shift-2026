@@ -21,4 +21,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "pizza-mityushin-shift-2026"
 include(":app")
- 
+include(":component:theme")

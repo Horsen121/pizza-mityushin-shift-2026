@@ -1,4 +1,4 @@
-package com.example.pizza_mityushin_shift_2026.presentation.ui.theme
+package com.example.theme.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle

@@ -3,7 +3,6 @@ plugins {
     alias(libs.plugins.kotlin.compose)
     id("com.google.devtools.ksp")
     id("androidx.room")
-    id("com.google.dagger.hilt.android")
 }
 
 android {
@@ -46,6 +45,8 @@ room {
 
 
 dependencies {
+    implementation(project(":component:theme"))
+
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
@@ -54,6 +55,8 @@ dependencies {
     implementation(libs.androidx.compose.ui.graphics)
     implementation(libs.androidx.compose.ui.tooling.preview)
     implementation(libs.androidx.compose.material3)
+    implementation(libs.androidx.navigation.compose)
+    implementation(libs.androidx.compose.material.icons.extended)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
@@ -67,7 +70,6 @@ dependencies {
     // Retrofit
     implementation(libs.retrofit)
     implementation(libs.kotlinx.serialization.json)
-    implementation(libs.retrofit2.kotlinx.serialization.converter)
     implementation(libs.retrofit2.converter.kotlinx.serialization)
     implementation(libs.retrofit2.converter.gson)
     implementation(libs.okhttp)
@@ -76,10 +78,7 @@ dependencies {
     implementation(libs.androidx.room.runtime)
     ksp(libs.androidx.room.compiler)
     implementation(libs.androidx.room.ktx)
-    testImplementation(libs.androidx.room.testing)
 
-    // Hilt
-    implementation(libs.hilt.android)
-    implementation(libs.androidx.hilt.navigation.compose)
-    ksp(libs.hilt.android.compiler)
+    // Koin
+    implementation(libs.koin.android)
 }
