@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">pizza-mityushin-shift-2026</string>
+    <string name="app_bottom_bar_main">Пицца</string>
+    <string name="app_bottom_bar_orders">Заказы</string>
+    <string name="app_bottom_bar_basket">Корзина</string>
+    <string name="app_bottom_bar_profile">Профиль</string>
 </resources>
