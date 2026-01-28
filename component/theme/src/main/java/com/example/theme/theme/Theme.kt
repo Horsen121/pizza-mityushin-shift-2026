@@ -11,25 +11,43 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
 
 private val DarkColorScheme = darkColorScheme(
-    primary = Purple80,
-    secondary = PurpleGrey80,
-    tertiary = Pink80
+    background = Normal,
+    onBackground = White,
+
+    primary = BrandBG,
+    onPrimary = White,
+
+    secondary = DarkBGSecondary,
+    onSecondary = DarkTextSecondary,
+
+    tertiary = DarkBGTertiary,
+    onTertiary = DarkTextTertiary,
+
+    surface = Medium,
+    onSurface = Light,
+
+    outline = DarkBorder,
+    error = Error,
 )
 
 private val LightColorScheme = lightColorScheme(
-    primary = Purple40,
-    secondary = PurpleGrey40,
-    tertiary = Pink40
+    background = BGPrimary,
+    onBackground = Normal,
 
-    /* Other default colors to override
-    background = Color(0xFFFFFBFE),
-    surface = Color(0xFFFFFBFE),
-    onPrimary = Color.White,
-    onSecondary = Color.White,
-    onTertiary = Color.White,
-    onBackground = Color(0xFF1C1B1F),
-    onSurface = Color(0xFF1C1B1F),
-    */
+    primary = BrandBG,
+    onPrimary = White,
+
+    secondary = BGSecondary,
+    onSecondary = TextSecondary,
+
+    tertiary = BGTertiary,
+    onTertiary = TextTertiary,
+
+    surface = Light,
+    onSurface = Medium,
+
+    outline = Border,
+    error = Error,
 )
 
 @Composable
