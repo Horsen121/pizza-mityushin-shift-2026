@@ -7,8 +7,11 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.animation.AnimatedContentScope
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Scaffold
@@ -29,7 +32,18 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.toRoute
+import com.example.basket.BasketRoute
+import com.example.basket.presentation.BasketScreen
+import com.example.card.PizzaCardRoute
+import com.example.card.presentation.PizzaCardScreen
+import com.example.main.MainRoute
+import com.example.main.presentation.MainScreen
+import com.example.orders.OrdersRoute
+import com.example.orders.presentation.OrdersScreen
 import com.example.pizza_mityushin_shift_2026.R
+import com.example.profile.ProfileRoute
+import com.example.profile.presentation.ProfileScreen
 import com.example.theme.theme.Pizzamityushinshift2026Theme
 
 class MainActivity : ComponentActivity() {
@@ -54,51 +68,62 @@ class MainActivity : ComponentActivity() {
                 Scaffold(
                     modifier = Modifier.fillMaxSize()
                 ) { innerPadding ->
-                    Column(
-                        modifier = Modifier
-                            .padding(
-                                top = innerPadding.calculateTopPadding(),
-                                bottom = innerPadding.calculateBottomPadding(),
-                                start = 16.dp,
-                                end = 16.dp
-                            )
-                    ) {
+                    Column {
                         NavHost(
+                            modifier = Modifier
+                                .weight(1f)
+                                .padding(
+                                    top = innerPadding.calculateTopPadding(),
+                                    bottom = innerPadding.calculateBottomPadding(),
+                                    start = 16.dp,
+                                    end = 16.dp
+                                )
+                            ,
                             navController = navController,
                             startDestination = MainRoute
                         ) {
                             animatedComposable<MainRoute> {
                                 MainScreen(
-                                    mainViewModel = koinViewModel(),
+//                                    mainViewModel = koinViewModel(),
                                     onItemClick = { pizzaId ->
-                                        navController.navigate(CardRoute(pizzaId))
+                                        navController.navigate(PizzaCardRoute(pizzaId))
                                     }
                                 )
                             }
-                            animatedComposable<CardRoute> {
-                                CardScreen(
-                                    cardViewModel = koinViewModel(),
-                                    onBackClick = {
-                                        navController.navigateUp())
-                                    }
+                            animatedComposable<PizzaCardRoute> {
+                                val destination = it.toRoute<PizzaCardRoute>()
+
+                                PizzaCardScreen(
+//                                    cardViewModel = koinViewModel { parametersOf(destination.pizzaId) },
+                                    onBackClick = { navController.navigateUp() }
                                 )
-                            }
-                        }
-                    }
-                    BottomNavigation(
-                        navigationOptions = NavigationOption.entries,
-                        selectedNavigationOption = currentRoute.value,
-                        onItemClicked = { navOption ->
-                            when (navOption) {
-                                NavigationOption.MAIN -> navController.openPoppingAllPrevious(MainRoute)
-                                NavigationOption.ORDERS -> navController.openPoppingAllPrevious(OrdersRoute)
-                                NavigationOption.BASKET -> navController.openPoppingAllPrevious(BasketRoute)
-                                NavigationOption.PROFILE -> navController.openPoppingAllPrevious(ProfileRoute)
                             }
 
-                            currentRoute.value = navOption
+                            animatedComposable<OrdersRoute> {
+                                OrdersScreen()
+                            }
+                            animatedComposable<BasketRoute> {
+                                BasketScreen()
+                            }
+                            animatedComposable<ProfileRoute> {
+                                ProfileScreen()
+                            }
                         }
-                    )
+                        BottomNavigation(
+                            navigationOptions = NavigationOption.entries,
+                            selectedNavigationOption = currentRoute.value,
+                            onItemClicked = { navOption ->
+                                when (navOption) {
+                                    NavigationOption.MAIN -> navController.openPoppingAllPrevious(MainRoute)
+                                    NavigationOption.ORDERS -> navController.openPoppingAllPrevious(OrdersRoute)
+                                    NavigationOption.BASKET -> navController.openPoppingAllPrevious(BasketRoute)
+                                    NavigationOption.PROFILE -> navController.openPoppingAllPrevious(ProfileRoute)
+                                }
+
+                                currentRoute.value = navOption
+                            }
+                        )
+                    }
                 }
             }
         }
@@ -121,13 +146,30 @@ private fun BottomNavigation(
     selectedNavigationOption: NavigationOption,
     onItemClicked: (NavigationOption) -> Unit,
 ) {
-    NavigationBar {
+    HorizontalDivider(
+        modifier = Modifier.height(1.dp),
+        color = MaterialTheme.colorScheme.outline,
+    )
+    NavigationBar(
+        containerColor = MaterialTheme.colorScheme.background,
+    ) {
         for (option in navigationOptions) {
+            val isSelected = selectedNavigationOption == option
             NavigationBarItem(
-                selected = selectedNavigationOption == option,
+                selected = isSelected,
                 onClick = { onItemClicked(option) },
-                icon = { Icon(getIcon(option), "") },
-                label = { Text(text = getLabel(option)) }
+                icon = {
+                    Icon(
+                        getIcon(option), "",
+                        tint = if(isSelected) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onTertiary
+                    )
+                },
+                label = {
+                    Text(
+                        text = getLabel(option),
+                        color = if(isSelected) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onTertiary
+                    )
+                }
             )
         }
     }
