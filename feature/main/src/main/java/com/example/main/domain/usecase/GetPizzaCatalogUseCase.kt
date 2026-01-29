@@ -3,8 +3,8 @@ package com.example.main.domain.usecase
 import com.example.main.domain.entity.PizzaCatalogItem
 import com.example.main.domain.repository.PizzaCatalogRepository
 
-class GetPizzaCatalog(
+class GetPizzaCatalogUseCase(
     private val repository: PizzaCatalogRepository
 ) {
-    suspend fun invoke(): List<PizzaCatalogItem> = repository.get()
+    suspend operator fun invoke(): List<PizzaCatalogItem> = repository.get()
 }

@@ -8,11 +8,11 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class PizzaCatalogItemModel(
-    var id: String? = null,
-    var name: String? = null,
+    var id: String,
+    var name: String,
+    var description: String,
     var ingredients: ArrayList<Ingredient> = arrayListOf(),
     var toppings: ArrayList<Topping> = arrayListOf(),
-    var description: String? = null,
     var sizes: ArrayList<Size> = arrayListOf(),
     var doughs: ArrayList<Dough> = arrayListOf(),
     var calories: Int? = null,
