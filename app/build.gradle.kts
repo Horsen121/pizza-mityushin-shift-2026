@@ -46,6 +46,7 @@ room {
 
 dependencies {
     implementation(project(":component:theme"))
+    implementation(project(":shared:network"))
     implementation(project(":feature:main"))
     implementation(project(":feature:orders"))
     implementation(project(":feature:basket"))
