@@ -1,6 +1,8 @@
-package com.example.pizza_mityushin_shift_2026.app
+package com.example.pizza_mityushin_shift_2026.app.app
 
 import android.app.Application
+import com.example.main.di.pizzaCatalogModule
+import com.example.network.networkModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
@@ -10,13 +12,12 @@ class App: Application() {
         super.onCreate()
 
         startKoin {
-            androidLogger() // Логирование ошибок Koin
+            androidLogger()
             androidContext(this@App)
 
-            // ЗАГРУЖАЕМ ВСЕ МОДУЛИ ЗДЕСЬ
             modules(
-//                networkModule,      // из :data:network
-//                databaseModule,     // из :data:database
+                networkModule,
+                pizzaCatalogModule
             )
         }
     }
