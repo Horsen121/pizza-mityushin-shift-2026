@@ -1,4 +1,4 @@
-package com.example.pizza_mityushin_shift_2026.app
+package com.example.pizza_mityushin_shift_2026.app.app
 
 import com.example.basket.BasketRoute
 import com.example.main.MainRoute

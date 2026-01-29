@@ -1,4 +1,4 @@
-package com.example.pizza_mityushin_shift_2026.app
+package com.example.pizza_mityushin_shift_2026.app.app
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -38,13 +38,14 @@ import com.example.basket.presentation.BasketScreen
 import com.example.card.PizzaCardRoute
 import com.example.card.presentation.PizzaCardScreen
 import com.example.main.MainRoute
-import com.example.main.presentation.MainScreen
+import com.example.main.ui.MainScreen
 import com.example.orders.OrdersRoute
 import com.example.orders.presentation.OrdersScreen
 import com.example.pizza_mityushin_shift_2026.R
 import com.example.profile.ProfileRoute
 import com.example.profile.presentation.ProfileScreen
 import com.example.theme.theme.Pizzamityushinshift2026Theme
+import org.koin.androidx.compose.koinViewModel
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -84,18 +85,18 @@ class MainActivity : ComponentActivity() {
                         ) {
                             animatedComposable<MainRoute> {
                                 MainScreen(
-//                                    mainViewModel = koinViewModel(),
                                     onItemClick = { pizzaId ->
                                         navController.navigate(PizzaCardRoute(pizzaId))
-                                    }
+                                    },
+                                    viewModel = koinViewModel()
                                 )
                             }
                             animatedComposable<PizzaCardRoute> {
                                 val destination = it.toRoute<PizzaCardRoute>()
 
                                 PizzaCardScreen(
-//                                    cardViewModel = koinViewModel { parametersOf(destination.pizzaId) },
                                     onBackClick = { navController.navigateUp() }
+//                                    viewModel = koinViewModel { parametersOf(destination.pizzaId) }
                                 )
                             }
 
