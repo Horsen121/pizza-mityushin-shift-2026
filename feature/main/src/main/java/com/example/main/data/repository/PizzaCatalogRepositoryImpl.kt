@@ -10,6 +10,6 @@ class PizzaCatalogRepositoryImpl(
     private val converter: PizzaCatalogItemConverter
 ): PizzaCatalogRepository {
     override suspend fun get(): List<PizzaCatalogItem> {
-        return dataSource.get().map { converter.convert(it) }
+        return dataSource.get().body()?.catalog?.map { converter.convert(it) } ?: emptyList()
     }
 }
