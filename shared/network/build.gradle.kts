@@ -42,6 +42,11 @@ dependencies {
     implementation(libs.retrofit2.converter.gson)
     implementation(libs.okhttp)
 
+    // Coil
+    implementation(libs.coil.network.okhttp)
+    implementation(libs.coil.compose)
+    implementation(libs.coil)
+
     // Dependency Injection
     implementation(platform(libs.koin.bom))
     implementation(libs.koin.core)

@@ -80,6 +80,11 @@ dependencies {
     implementation(libs.retrofit2.converter.gson)
     implementation(libs.okhttp)
 
+    // Coil
+    implementation(libs.coil.network.okhttp)
+    implementation(libs.coil.compose)
+    implementation(libs.coil)
+
     // Room
     implementation(libs.androidx.room.runtime)
     ksp(libs.androidx.room.compiler)

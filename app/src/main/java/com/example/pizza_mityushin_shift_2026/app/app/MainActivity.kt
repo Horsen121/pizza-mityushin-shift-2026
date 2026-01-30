@@ -69,13 +69,12 @@ class MainActivity : ComponentActivity() {
                 Scaffold(
                     modifier = Modifier.fillMaxSize()
                 ) { innerPadding ->
-                    Column {
+                    Column(modifier = Modifier.fillMaxSize()) {
                         NavHost(
                             modifier = Modifier
                                 .weight(1f)
                                 .padding(
                                     top = innerPadding.calculateTopPadding(),
-                                    bottom = innerPadding.calculateBottomPadding(),
                                     start = 16.dp,
                                     end = 16.dp
                                 )
