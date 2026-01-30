@@ -1,5 +1,6 @@
 package com.example.network
 
+import coil.ImageLoader
 import kotlinx.serialization.json.Json
 import okhttp3.Interceptor
 import okhttp3.MediaType.Companion.toMediaType
@@ -27,6 +28,12 @@ val networkModule = module {
             writeTimeout(WRITE_TIMEOUT, TimeUnit.SECONDS)
             setSslSocketFactory()
         }.build()
+    }
+
+    single {
+        ImageLoader.Builder(get())
+            .okHttpClient { get<OkHttpClient>() }
+            .build()
     }
 
     single {
