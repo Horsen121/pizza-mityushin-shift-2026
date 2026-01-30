@@ -34,6 +34,7 @@ android {
 
 dependencies {
     implementation(project(":component:theme"))
+    implementation(project(":shared:pizza"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
@@ -49,6 +50,13 @@ dependencies {
     implementation(libs.material)
     implementation(libs.kotlinx.serialization.json)
     implementation(libs.kotlinx.coroutines.android)
+
+    // Retrofit
+    implementation(libs.retrofit)
+    implementation(libs.kotlinx.serialization.json)
+    implementation(libs.retrofit2.converter.kotlinx.serialization)
+    implementation(libs.retrofit2.converter.gson)
+    implementation(libs.okhttp)
 
     // Dependency Injection
     implementation(platform(libs.koin.bom))

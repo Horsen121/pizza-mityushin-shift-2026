@@ -46,6 +46,7 @@ room {
 
 dependencies {
     implementation(project(":component:theme"))
+    implementation(project(":shared:network"))
     implementation(project(":feature:main"))
     implementation(project(":feature:orders"))
     implementation(project(":feature:basket"))
@@ -78,6 +79,11 @@ dependencies {
     implementation(libs.retrofit2.converter.kotlinx.serialization)
     implementation(libs.retrofit2.converter.gson)
     implementation(libs.okhttp)
+
+    // Coil
+    implementation(libs.coil.network.okhttp)
+    implementation(libs.coil.compose)
+    implementation(libs.coil)
 
     // Room
     implementation(libs.androidx.room.runtime)

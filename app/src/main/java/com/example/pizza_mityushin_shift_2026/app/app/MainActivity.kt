@@ -1,4 +1,4 @@
-package com.example.pizza_mityushin_shift_2026.app
+package com.example.pizza_mityushin_shift_2026.app.app
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -37,14 +37,15 @@ import com.example.basket.BasketRoute
 import com.example.basket.presentation.BasketScreen
 import com.example.card.PizzaCardRoute
 import com.example.card.presentation.PizzaCardScreen
-import com.example.main.MainRoute
-import com.example.main.presentation.MainScreen
+import com.example.main.PizzaCatalogRoute
+import com.example.main.ui.PizzaCatalogScreen
 import com.example.orders.OrdersRoute
 import com.example.orders.presentation.OrdersScreen
 import com.example.pizza_mityushin_shift_2026.R
 import com.example.profile.ProfileRoute
 import com.example.profile.presentation.ProfileScreen
 import com.example.theme.theme.Pizzamityushinshift2026Theme
+import org.koin.androidx.compose.koinViewModel
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -68,34 +69,33 @@ class MainActivity : ComponentActivity() {
                 Scaffold(
                     modifier = Modifier.fillMaxSize()
                 ) { innerPadding ->
-                    Column {
+                    Column(modifier = Modifier.fillMaxSize()) {
                         NavHost(
                             modifier = Modifier
                                 .weight(1f)
                                 .padding(
                                     top = innerPadding.calculateTopPadding(),
-                                    bottom = innerPadding.calculateBottomPadding(),
                                     start = 16.dp,
                                     end = 16.dp
                                 )
                             ,
                             navController = navController,
-                            startDestination = MainRoute
+                            startDestination = PizzaCatalogRoute
                         ) {
-                            animatedComposable<MainRoute> {
-                                MainScreen(
-//                                    mainViewModel = koinViewModel(),
+                            animatedComposable<PizzaCatalogRoute> {
+                                PizzaCatalogScreen(
                                     onItemClick = { pizzaId ->
                                         navController.navigate(PizzaCardRoute(pizzaId))
-                                    }
+                                    },
+                                    viewModel = koinViewModel()
                                 )
                             }
                             animatedComposable<PizzaCardRoute> {
                                 val destination = it.toRoute<PizzaCardRoute>()
 
                                 PizzaCardScreen(
-//                                    cardViewModel = koinViewModel { parametersOf(destination.pizzaId) },
                                     onBackClick = { navController.navigateUp() }
+//                                    viewModel = koinViewModel { parametersOf(destination.pizzaId) }
                                 )
                             }
 
@@ -114,7 +114,7 @@ class MainActivity : ComponentActivity() {
                             selectedNavigationOption = currentRoute.value,
                             onItemClicked = { navOption ->
                                 when (navOption) {
-                                    NavigationOption.MAIN -> navController.openPoppingAllPrevious(MainRoute)
+                                    NavigationOption.MAIN -> navController.openPoppingAllPrevious(PizzaCatalogRoute)
                                     NavigationOption.ORDERS -> navController.openPoppingAllPrevious(OrdersRoute)
                                     NavigationOption.BASKET -> navController.openPoppingAllPrevious(BasketRoute)
                                     NavigationOption.PROFILE -> navController.openPoppingAllPrevious(ProfileRoute)
