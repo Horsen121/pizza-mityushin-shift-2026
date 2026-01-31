@@ -2,4 +2,11 @@
 <resources>
     <string name="pizza_card_title">Пицца</string>
     <string name="pizza_card_add_elements">Добавить по вкусу</string>
+
+    <string name="pizza_card_dough_thin">традиционное тесто</string>
+    <string name="pizza_card_dough_thick">толстое тесто</string>
+
+    <string name="pizza_card_size_small">22 см</string>
+    <string name="pizza_card_size_medium">26 см</string>
+    <string name="pizza_card_size_large">30 см</string>
 </resources>

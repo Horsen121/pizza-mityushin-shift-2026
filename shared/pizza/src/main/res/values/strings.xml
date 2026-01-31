@@ -1,29 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="ingredient_pineapple">Ананас</string>
-    <string name="ingredient_mozzarella">Сливочная моцарелла</string>
-    <string name="ingredient_peperoni">Пеперони</string>
-    <string name="ingredient_green_pepper">Зелёный перец</string>
-    <string name="ingredient_mushrooms">Грибы</string>
-    <string name="ingredient_basil">Базилик</string>
-    <string name="ingredient_cheddar">Сыры чеддер и пармезан</string>
-    <string name="ingredient_parmesan">Сыр пармезан</string>
-    <string name="ingredient_feta">Сыр фета</string>
-    <string name="ingredient_ham">Ветчина</string>
-    <string name="ingredient_pickle">Маринованный огурец</string>
-    <string name="ingredient_tomato">Помидор</string>
-    <string name="ingredient_bacon">Бекон</string>
-    <string name="ingredient_onion">Лук</string>
-    <string name="ingredient_chile">Острый перец халапеньо</string>
-    <string name="ingredient_shrimps">Креветки</string>
-    <string name="ingredient_chicken_fillet">Нежный цыплёнок</string>
-    <string name="ingredient_meatball">Мясные фрикадельки</string>
+    <string name="shared_pizza_ingredient_pineapple">Ананас</string>
+    <string name="shared_pizza_ingredient_mozzarella">Сливочная моцарелла</string>
+    <string name="shared_pizza_ingredient_peperoni">Пеперони</string>
+    <string name="shared_pizza_ingredient_green_pepper">Зелёный перец</string>
+    <string name="shared_pizza_ingredient_mushrooms">Грибы</string>
+    <string name="shared_pizza_ingredient_basil">Базилик</string>
+    <string name="shared_pizza_ingredient_cheddar">Сыры чеддер и пармезан</string>
+    <string name="shared_pizza_ingredient_parmesan">Сыр пармезан</string>
+    <string name="shared_pizza_ingredient_feta">Сыр фета</string>
+    <string name="shared_pizza_ingredient_ham">Ветчина</string>
+    <string name="shared_pizza_ingredient_pickle">Маринованный огурец</string>
+    <string name="shared_pizza_ingredient_tomato">Помидор</string>
+    <string name="shared_pizza_ingredient_bacon">Бекон</string>
+    <string name="shared_pizza_ingredient_onion">Лук</string>
+    <string name="shared_pizza_ingredient_chile">Острый перец халапеньо</string>
+    <string name="shared_pizza_ingredient_shrimps">Креветки</string>
+    <string name="shared_pizza_ingredient_chicken_fillet">Нежный цыплёнок</string>
+    <string name="shared_pizza_ingredient_meatball">Мясные фрикадельки</string>
 
-    <string name="dough_thin">Тонкое тесто</string>
-    <string name="dough_thick">Толстое тесто</string>
+    <string name="shared_pizza_dough_thin">Тонкое тесто</string>
+    <string name="shared_pizza_dough_thick">Толстое тесто</string>
 
-    <string name="size_small">Маленькая</string>
-    <string name="size_medium">Средняя</string>
-    <string name="size_large">Большая</string>
+    <string name="shared_pizza_size_small">Маленькая</string>
+    <string name="shared_pizza_size_medium">Средняя</string>
+    <string name="shared_pizza_size_large">Большая</string>
 
 </resources>
