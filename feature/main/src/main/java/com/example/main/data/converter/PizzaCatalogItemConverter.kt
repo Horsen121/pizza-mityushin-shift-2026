@@ -1,10 +1,11 @@
 package com.example.main.data.converter
 
 import com.example.main.domain.entity.PizzaCatalogItem
-import com.example.pizza.model.network.PizzaItemModel
+import com.example.pizza.model.network.PizzaModel
 
 class PizzaCatalogItemConverter {
-    fun convert(model: PizzaItemModel): PizzaCatalogItem {
+
+    fun convert(model: PizzaModel): PizzaCatalogItem {
         val price = listOfNotNull(
             model.ingredients.minByOrNull { it.price }?.price,
                     model.toppings.minByOrNull { it.price }?.price,
