@@ -1,6 +1,6 @@
 package com.example.card.data.repository
 
-import com.example.pizza.model.PizzaItemModel
+import com.example.pizza.model.network.PizzaItemModel
 import kotlinx.serialization.Serializable
 
 @Serializable

@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
-class PizzaCatalogScreenViewModel(
+class PizzaCatalogViewModel(
     private val getPizzaCatalogUseCase: GetPizzaCatalogUseCase
 ): ViewModel() {
     private val _state = MutableStateFlow<PizzaCatalogState>(PizzaCatalogState.Initial)

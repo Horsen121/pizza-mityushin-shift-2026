@@ -6,7 +6,7 @@ import com.example.main.data.repository.PizzaCatalogRepositoryImpl
 import com.example.main.domain.entity.PizzaCatalogItem
 import com.example.main.domain.repository.PizzaCatalogRepository
 import com.example.main.domain.usecase.GetPizzaCatalogUseCase
-import com.example.main.presentation.PizzaCatalogScreenViewModel
+import com.example.main.presentation.PizzaCatalogViewModel
 import org.koin.core.module.dsl.bind
 import org.koin.core.module.dsl.factoryOf
 import org.koin.core.module.dsl.singleOf
@@ -20,5 +20,5 @@ val pizzaCatalogModule = module {
     factoryOf(::PizzaCatalogItem)
     factoryOf(::GetPizzaCatalogUseCase)
     factoryOf(::PizzaCatalogItemConverter)
-    viewModelOf(::PizzaCatalogScreenViewModel)
+    viewModelOf(::PizzaCatalogViewModel)
 }

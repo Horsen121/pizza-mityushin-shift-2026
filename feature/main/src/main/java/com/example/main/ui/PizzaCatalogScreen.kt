@@ -23,13 +23,13 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.main.R
-import com.example.main.presentation.PizzaCatalogScreenViewModel
 import com.example.main.presentation.PizzaCatalogState
+import com.example.main.presentation.PizzaCatalogViewModel
 
 @Composable
 fun PizzaCatalogScreen(
     onItemClick: (Long) -> Unit,
-    viewModel: PizzaCatalogScreenViewModel
+    viewModel: PizzaCatalogViewModel
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
     PizzaCatalogScreenContent(
