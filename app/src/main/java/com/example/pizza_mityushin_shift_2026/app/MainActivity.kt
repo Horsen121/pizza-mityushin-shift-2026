@@ -1,4 +1,4 @@
-package com.example.pizza_mityushin_shift_2026.app.app
+package com.example.pizza_mityushin_shift_2026.app
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -53,7 +53,9 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            Pizzamityushinshift2026Theme {
+            Pizzamityushinshift2026Theme(
+                dynamicColor = false
+            ) {
                 val navController = rememberNavController()
                 val currentRoute = rememberSaveable { mutableStateOf(NavigationOption.MAIN) }
 
