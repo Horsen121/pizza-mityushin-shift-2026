@@ -9,7 +9,6 @@ import com.example.card.domain.usecase.GetPizzaCardUseCase
 import com.example.card.presentation.PizzaCardViewModel
 import org.koin.core.module.dsl.bind
 import org.koin.core.module.dsl.factoryOf
-import org.koin.core.module.dsl.singleOf
 import org.koin.core.module.dsl.viewModelOf
 import org.koin.dsl.module
 import retrofit2.Retrofit
@@ -17,7 +16,7 @@ import retrofit2.Retrofit
 val pizzaCardModule = module {
 
     single { get<Retrofit>().create(PizzaCardApi::class.java) }
-    singleOf(::PizzaCardRepositoryImpl) { bind<PizzaCardRepository>() }
+    factoryOf(::PizzaCardRepositoryImpl) { bind<PizzaCardRepository>() }
     factoryOf(::PizzaCardItem)
     factoryOf(::GetPizzaCardUseCase)
     factoryOf(::PizzaCardItemConverter)

@@ -16,22 +16,20 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
-import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
 import com.example.pizza.model.ui.SizeUI
 import com.example.pizza.utils.toNameRes
+import com.example.theme.components.BodyMediumText
 
 @Composable
-fun SegmentedSizesControl(
+internal fun SegmentedSizesControl(
     items: ArrayList<SizeUI>,
     selectedIndex: Int,
     onItemSelection: (Int) -> Unit
@@ -77,11 +75,9 @@ fun SegmentedSizesControl(
                         },
                     contentAlignment = Alignment.Center
                 ) {
-                    Text(
-                        text = stringResource(item.type.toNameRes()),
+                    BodyMediumText(
+                        text = item.type.toNameRes(),
                         color = if (index == selectedIndex) MaterialTheme.colorScheme.onBackground else MaterialTheme.colorScheme.onTertiary,
-                        fontWeight = FontWeight.Normal,
-                        style = MaterialTheme.typography.bodyMedium
                     )
                 }
             }

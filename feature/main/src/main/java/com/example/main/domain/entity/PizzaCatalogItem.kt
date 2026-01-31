@@ -7,5 +7,5 @@ data class PizzaCatalogItem(
     val minPrice: Long,
     var isNew: Boolean? = null,
     var isHit: Boolean? = null,
-    var img: String? = null
+    var img: String
 )

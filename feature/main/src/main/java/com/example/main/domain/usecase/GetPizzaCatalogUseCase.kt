@@ -5,6 +5,4 @@ import com.example.main.domain.repository.PizzaCatalogRepository
 
 class GetPizzaCatalogUseCase(
     private val repository: PizzaCatalogRepository
-) {
-    suspend operator fun invoke(): List<PizzaCatalogItem> = repository.get()
-}
+) : suspend () -> List<PizzaCatalogItem> by repository::get
