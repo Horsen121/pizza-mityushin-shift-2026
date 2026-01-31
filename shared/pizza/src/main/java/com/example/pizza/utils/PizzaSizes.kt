@@ -18,7 +18,7 @@ fun String.toSizeTypeOrNull(): PizzaSizes? =
     runCatching { PizzaSizes.valueOf(this) }.getOrNull()
 
 fun PizzaSizes.toNameRes(): Int = when (this) {
-    PizzaSizes.SMALL -> R.string.size_small
-    PizzaSizes.MEDIUM -> R.string.size_medium
-    PizzaSizes.LARGE -> R.string.size_large
+    PizzaSizes.SMALL -> R.string.shared_pizza_size_small
+    PizzaSizes.MEDIUM -> R.string.shared_pizza_size_medium
+    PizzaSizes.LARGE -> R.string.shared_pizza_size_large
 }

@@ -3,14 +3,14 @@ package com.example.pizza.model.network
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class PizzaItemModel(
+data class PizzaModel(
     var id: String,
     var name: String,
     var description: String,
-    var ingredients: ArrayList<Ingredient> = arrayListOf(),
-    var toppings: ArrayList<Topping> = arrayListOf(),
-    var sizes: ArrayList<Size> = arrayListOf(),
-    var doughs: ArrayList<Dough> = arrayListOf(),
+    var ingredients: ArrayList<IngredientModel> = arrayListOf(),
+    var toppings: ArrayList<ToppingModel> = arrayListOf(),
+    var sizes: ArrayList<SizeModel> = arrayListOf(),
+    var doughs: ArrayList<DoughModel> = arrayListOf(),
     var calories: Int,
     var protein: String,
     var totalFat: String,

@@ -1,6 +1,6 @@
 package com.example.pizza.model.ui
 
-import com.example.pizza.model.network.Size
+import com.example.pizza.model.network.SizeModel
 import com.example.pizza.utils.PizzaSizes
 import com.example.pizza.utils.toSizeTypeOrNull
 import kotlinx.serialization.Serializable
@@ -12,10 +12,10 @@ data class SizeUI(
 )
 
 
-fun ArrayList<Size>.toDomain(): ArrayList<SizeUI> = this
+fun ArrayList<SizeModel>.toDomain(): ArrayList<SizeUI> = this
     .mapNotNull { it.toDomain() } as ArrayList<SizeUI>
 
-fun Size.toDomain(): SizeUI? {
+fun SizeModel.toDomain(): SizeUI? {
     val sizeType = type.toSizeTypeOrNull() ?: return null
     return SizeUI(
         type = sizeType,
