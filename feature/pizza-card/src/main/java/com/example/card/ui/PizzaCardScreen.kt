@@ -17,10 +17,7 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBackIosNew
-import androidx.compose.material.icons.filled.Error
-import androidx.compose.material.icons.filled.Loop
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -30,18 +27,19 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ColorFilter
-import androidx.compose.ui.graphics.vector.rememberVectorPainter
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import coil.compose.AsyncImage
-import coil.request.ImageRequest
 import com.example.card.R
 import com.example.card.presentation.PizzaCardState
 import com.example.card.presentation.PizzaCardViewModel
 import com.example.card.presentation.toDescRes
+import com.example.theme.components.BodyLargeText
+import com.example.theme.components.BodyMediumText
+import com.example.theme.components.LabelMediumText
+import com.example.theme.components.TitleText
+import com.example.theme.elements.NetworkImage
 
 @Composable
 fun PizzaCardScreen(
@@ -102,10 +100,7 @@ private fun PizzaCardScreenContent(
                             Icons.Default.ArrowBackIosNew, null,
                             colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.onTertiary)
                         )
-                        Text(
-                            stringResource(R.string.pizza_card_title),
-                            style = MaterialTheme.typography.titleLarge
-                        )
+                        TitleText(R.string.pizza_card_title)
                     }
 
                     Row(
@@ -114,16 +109,8 @@ private fun PizzaCardScreenContent(
                         modifier = Modifier
                             .fillMaxWidth()
                     ) {
-                        AsyncImage(
-                            model = ImageRequest.Builder(LocalContext.current)
-                                .data("https://shift-intensive.ru/api/${pizza.img}")
-                                .crossfade(true)
-                                .build(),
-                            placeholder = rememberVectorPainter(Icons.Default.Loop),
-                            error = rememberVectorPainter(Icons.Default.Error),
-                            onError = { Log.e("TAG", "PizzaListElement: ${it.result.throwable})") },
-                            contentDescription = null,
-                            contentScale = ContentScale.Crop,
+                        NetworkImage(
+                            pizza.img,
                             modifier = Modifier.size(250.dp)
                         )
                     }
@@ -131,18 +118,12 @@ private fun PizzaCardScreenContent(
                     Column(
                         verticalArrangement = Arrangement.spacedBy(8.dp)
                     ) {
-                        Text(
-                            pizza.name,
-                            style = MaterialTheme.typography.titleLarge
+                        TitleText(pizza.name)
+                        BodyMediumText(
+                            "${stringResource(currentSize.toDescRes())}, " +
+                                    " ${stringResource(pizza.doughs.first().type.toDescRes())}"
                         )
-                        Text(
-                            "${stringResource(currentSize.toDescRes())},  ${stringResource(pizza.doughs.first().type.toDescRes())}",
-                            style = MaterialTheme.typography.bodyMedium
-                        )
-                        Text(
-                            ingredients,
-                            style = MaterialTheme.typography.bodyLarge
-                        )
+                        BodyLargeText(ingredients)
                     }
 
                     SegmentedSizesControl(
@@ -154,10 +135,7 @@ private fun PizzaCardScreenContent(
                         }
                     )
 
-                    Text(
-                        stringResource(R.string.pizza_card_add_elements),
-                        style = MaterialTheme.typography.titleSmall
-                    )
+                    LabelMediumText(R.string.pizza_card_add_elements)
                 }
             }
             items(pizza.toppings, key = { it.type }) {
