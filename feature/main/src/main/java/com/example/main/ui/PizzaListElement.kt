@@ -20,7 +20,7 @@ import com.example.theme.components.LabelMediumText
 import com.example.theme.elements.NetworkImage
 
 @Composable
-fun PizzaListElement(
+internal fun PizzaListElement(
     pizza: PizzaCatalogItem,
     onClick: (Long) -> Unit,
     modifier: Modifier = Modifier

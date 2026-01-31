@@ -2,6 +2,7 @@ package com.example.main.ui
 
 import android.util.Log
 import android.widget.Toast
+import androidx.compose.animation.Crossfade
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -24,12 +25,13 @@ import com.example.main.presentation.PizzaCatalogState
 import com.example.main.presentation.PizzaCatalogViewModel
 import com.example.theme.components.TitleText
 import com.example.theme.elements.FullScreenProgressIndicator
+import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun PizzaCatalogScreen(
-    onItemClick: (Long) -> Unit,
-    viewModel: PizzaCatalogViewModel
+    onItemClick: (Long) -> Unit
 ) {
+    val viewModel: PizzaCatalogViewModel = koinViewModel()
     val context = LocalContext.current
     val state by viewModel.state.collectAsStateWithLifecycle()
 
@@ -37,25 +39,27 @@ fun PizzaCatalogScreen(
         viewModel.loadData()
     }
 
-    when(val currentState = state) {
-        is PizzaCatalogState.Initial, PizzaCatalogState.Loading -> {
-            FullScreenProgressIndicator()
-        }
-        is PizzaCatalogState.Content -> {
-            PizzaCatalogScreenContent(
-                currentState,
-                onItemClick
-            )
-        }
-        is PizzaCatalogState.Error -> {
-            Toast.makeText(context, currentState.message, Toast.LENGTH_SHORT).show()
-            Log.e("TAG", "PizzaCardScreenContent: ${currentState.message}")
+    Crossfade(targetState = state) { currentState ->
+        when(currentState) {
+            is PizzaCatalogState.Initial, PizzaCatalogState.Loading -> {
+                FullScreenProgressIndicator()
+            }
+            is PizzaCatalogState.Content -> {
+                PizzaCatalogScreenContent(
+                    currentState,
+                    onItemClick
+                )
+            }
+            is PizzaCatalogState.Error -> {
+                Toast.makeText(context, currentState.message, Toast.LENGTH_SHORT).show()
+                Log.e("TAG", "PizzaCatalogScreen: ${currentState.message}")
+            }
         }
     }
 }
 
 @Composable
-fun PizzaCatalogScreenContent(
+private fun PizzaCatalogScreenContent(
     state: PizzaCatalogState.Content,
     onItemClick: (Long) -> Unit,
 ) {

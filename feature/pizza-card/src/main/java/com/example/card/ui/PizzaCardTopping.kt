@@ -22,7 +22,7 @@ import com.example.theme.components.LabelMediumText
 import com.example.theme.elements.NetworkImage
 
 @Composable
-fun PizzaCardTopping(
+internal fun PizzaCardTopping(
     topping: ToppingUI,
     onToppingClick: (Int) -> Unit
 ) {

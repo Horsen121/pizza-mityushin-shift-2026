@@ -45,8 +45,6 @@ import com.example.pizza_mityushin_shift_2026.R
 import com.example.profile.ProfileRoute
 import com.example.profile.presentation.ProfileScreen
 import com.example.theme.theme.Pizzamityushinshift2026Theme
-import org.koin.androidx.compose.koinViewModel
-import org.koin.core.parameter.parametersOf
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -89,8 +87,7 @@ class MainActivity : ComponentActivity() {
                                 PizzaCatalogScreen(
                                     onItemClick = { pizzaId ->
                                         navController.navigate(PizzaCardRoute(pizzaId))
-                                    },
-                                    viewModel = koinViewModel()
+                                    }
                                 )
                             }
                             animatedComposable<PizzaCardRoute> {
@@ -98,7 +95,7 @@ class MainActivity : ComponentActivity() {
 
                                 PizzaCardScreen(
                                     onBackClick = { navController.navigateUp() },
-                                    viewModel = koinViewModel { parametersOf(destination.pizzaId) }
+                                    destination = destination
                                 )
                             }
 

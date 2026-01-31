@@ -9,14 +9,13 @@ import com.example.main.domain.usecase.GetPizzaCatalogUseCase
 import com.example.main.presentation.PizzaCatalogViewModel
 import org.koin.core.module.dsl.bind
 import org.koin.core.module.dsl.factoryOf
-import org.koin.core.module.dsl.singleOf
 import org.koin.core.module.dsl.viewModelOf
 import org.koin.dsl.module
 import retrofit2.Retrofit
 
 val pizzaCatalogModule = module {
     single { get<Retrofit>().create(PizzaCatalogApi::class.java) }
-    singleOf(::PizzaCatalogRepositoryImpl) { bind<PizzaCatalogRepository>() }
+    factoryOf(::PizzaCatalogRepositoryImpl) { bind<PizzaCatalogRepository>() }
     factoryOf(::PizzaCatalogItem)
     factoryOf(::GetPizzaCatalogUseCase)
     factoryOf(::PizzaCatalogItemConverter)

@@ -29,7 +29,7 @@ import com.example.pizza.utils.toNameRes
 import com.example.theme.components.BodyMediumText
 
 @Composable
-fun SegmentedSizesControl(
+internal fun SegmentedSizesControl(
     items: ArrayList<SizeUI>,
     selectedIndex: Int,
     onItemSelection: (Int) -> Unit

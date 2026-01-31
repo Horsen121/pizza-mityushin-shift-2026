@@ -3,6 +3,7 @@ package com.example.card.ui
 import android.util.Log
 import android.widget.Toast
 import androidx.annotation.StringRes
+import androidx.compose.animation.Crossfade
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -32,6 +33,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.example.card.PizzaCardRoute
 import com.example.card.R
 import com.example.card.domain.entity.PizzaCardItem
 import com.example.card.presentation.PizzaCardState
@@ -44,12 +46,15 @@ import com.example.theme.components.LabelMediumText
 import com.example.theme.components.TitleText
 import com.example.theme.elements.FullScreenProgressIndicator
 import com.example.theme.elements.NetworkImage
+import org.koin.androidx.compose.koinViewModel
+import org.koin.core.parameter.parametersOf
 
 @Composable
 fun PizzaCardScreen(
     onBackClick: () -> Unit,
-    viewModel: PizzaCardViewModel
+    destination: PizzaCardRoute
 ) {
+    val viewModel: PizzaCardViewModel = koinViewModel { parametersOf(destination.pizzaId) }
     val context = LocalContext.current
     val state by viewModel.state.collectAsStateWithLifecycle()
 
@@ -57,21 +62,25 @@ fun PizzaCardScreen(
         viewModel.loadData()
     }
 
-    when(val currentState = state) {
-        is PizzaCardState.Initial, PizzaCardState.Loading -> {
-            FullScreenProgressIndicator()
-        }
-        is PizzaCardState.Content -> {
-            PizzaCardScreenContent(
-                currentState,
-                onBackClick,
-                { viewModel.onSizeSelect(it) },
-                viewModel.getIngredients(state)
-            )
-        }
-        is PizzaCardState.Error -> {
-            Toast.makeText(context, currentState.message, Toast.LENGTH_SHORT).show()
-            Log.e("TAG", "PizzaCardScreenContent: ${currentState.message}")
+    Crossfade(targetState = state) { currentState ->
+        when (currentState) {
+            is PizzaCardState.Initial, PizzaCardState.Loading -> {
+                FullScreenProgressIndicator()
+            }
+
+            is PizzaCardState.Content -> {
+                PizzaCardScreenContent(
+                    currentState,
+                    onBackClick,
+                    { viewModel.onSizeSelect(it) },
+                    viewModel.getIngredients(state)
+                )
+            }
+
+            is PizzaCardState.Error -> {
+                Toast.makeText(context, currentState.message, Toast.LENGTH_SHORT).show()
+                Log.e("TAG", "PizzaCardScreen: ${currentState.message}")
+            }
         }
     }
 }
@@ -126,7 +135,7 @@ private fun PizzaCardScreenContent(
 }
 
 @Composable
-fun NavTitle(
+private fun NavTitle(
     @StringRes text: Int,
     onBackClick: () -> Unit,
     modifier: Modifier = Modifier
@@ -148,7 +157,7 @@ fun NavTitle(
 }
 
 @Composable
-fun PizzaInfo(
+private fun PizzaInfo(
     pizza: PizzaCardItem,
     size: PizzaSizes,
     ingredients: String
