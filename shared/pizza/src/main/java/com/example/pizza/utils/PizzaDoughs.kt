@@ -17,6 +17,6 @@ fun String.toDoughTypeOrNull(): PizzaDoughs? =
     runCatching { PizzaDoughs.valueOf(this) }.getOrNull()
 
 fun PizzaDoughs.toNameRes(): Int = when (this) {
-    PizzaDoughs.THIN -> R.string.dough_thin
-    PizzaDoughs.THICK -> R.string.dough_thick
+    PizzaDoughs.THIN -> R.string.shared_pizza_dough_thin
+    PizzaDoughs.THICK -> R.string.shared_pizza_dough_thick
 }

@@ -15,6 +15,7 @@ import org.koin.dsl.module
 import retrofit2.Retrofit
 
 val pizzaCardModule = module {
+
     single { get<Retrofit>().create(PizzaCardApi::class.java) }
     singleOf(::PizzaCardRepositoryImpl) { bind<PizzaCardRepository>() }
     factoryOf(::PizzaCardItem)

@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.GridItemSpan
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material.icons.Icons
@@ -40,8 +41,7 @@ import coil.request.ImageRequest
 import com.example.card.R
 import com.example.card.presentation.PizzaCardState
 import com.example.card.presentation.PizzaCardViewModel
-import com.example.pizza.model.ui.ToppingUI
-import com.example.pizza.utils.toNameRes
+import com.example.card.presentation.toDescRes
 
 @Composable
 fun PizzaCardScreen(
@@ -75,103 +75,94 @@ private fun PizzaCardScreenContent(
         }
     }
 
-    Column(
-        verticalArrangement = Arrangement.spacedBy(20.dp),
-        modifier = Modifier
-            .fillMaxSize()
-    ) {
+    if(state is PizzaCardState.Content) {
+        val pizza = state.pizza
+        var currentSize by remember { mutableStateOf(pizza.sizes.first().type) }
 
-        Row(
-            horizontalArrangement = Arrangement.spacedBy(28.dp),
-            verticalAlignment = Alignment.CenterVertically,
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(62.dp)
-                .clickable(onClick = { onBackClick() })
+        LazyVerticalGrid(
+            columns = GridCells.Fixed(3),
+            verticalArrangement = Arrangement.spacedBy(8.dp),
+            horizontalArrangement = Arrangement.spacedBy(8.dp),
         ) {
-            Image(
-                Icons.Default.ArrowBackIosNew, null,
-                colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.onTertiary)
-            )
-            Text(
-                stringResource(R.string.pizza_card_title),
-                style = MaterialTheme.typography.titleLarge
-            )
-        }
+            item(span = { GridItemSpan(maxLineSpan) }) {
+                Column(
+                    verticalArrangement = Arrangement.spacedBy(20.dp),
+                    modifier = Modifier.fillMaxSize()
+                ) {
 
-        if(state is PizzaCardState.Content) {
-            val pizza = state.pizza
-            var currentSize by remember { mutableStateOf(pizza.sizes.first().type) }
+                    Row(
+                        horizontalArrangement = Arrangement.spacedBy(28.dp),
+                        verticalAlignment = Alignment.CenterVertically,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(62.dp)
+                            .clickable(onClick = { onBackClick() })
+                    ) {
+                        Image(
+                            Icons.Default.ArrowBackIosNew, null,
+                            colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.onTertiary)
+                        )
+                        Text(
+                            stringResource(R.string.pizza_card_title),
+                            style = MaterialTheme.typography.titleLarge
+                        )
+                    }
 
-            Row(
-                horizontalArrangement = Arrangement.Center,
-                verticalAlignment = Alignment.CenterVertically,
-                modifier = Modifier
-                    .fillMaxWidth()
-            ) {
-                AsyncImage(
-                    model = ImageRequest.Builder(LocalContext.current)
-                        .data("https://shift-intensive.ru/api/${pizza.img}")
-                        .crossfade(true)
-                        .build(),
-                    placeholder = rememberVectorPainter(Icons.Default.Loop),
-                    error = rememberVectorPainter(Icons.Default.Error),
-                    onError = { Log.e("TAG", "PizzaListElement: ${it.result.throwable})") },
-                    contentDescription = null,
-                    contentScale = ContentScale.Crop,
-                    modifier = Modifier.size(250.dp)
-                )
-            }
+                    Row(
+                        horizontalArrangement = Arrangement.Center,
+                        verticalAlignment = Alignment.CenterVertically,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                    ) {
+                        AsyncImage(
+                            model = ImageRequest.Builder(LocalContext.current)
+                                .data("https://shift-intensive.ru/api/${pizza.img}")
+                                .crossfade(true)
+                                .build(),
+                            placeholder = rememberVectorPainter(Icons.Default.Loop),
+                            error = rememberVectorPainter(Icons.Default.Error),
+                            onError = { Log.e("TAG", "PizzaListElement: ${it.result.throwable})") },
+                            contentDescription = null,
+                            contentScale = ContentScale.Crop,
+                            modifier = Modifier.size(250.dp)
+                        )
+                    }
 
-            Column(
-                verticalArrangement = Arrangement.spacedBy(8.dp)
-            ) {
-                Text(
-                    pizza.name,
-                    style = MaterialTheme.typography.titleLarge
-                )
-                Text(
-                    "${stringResource(currentSize.toNameRes())},  ${stringResource(pizza.doughs.first().type.toNameRes())}",
-                    style = MaterialTheme.typography.bodyMedium
-                )
-                Text(
-                    ingredients,
-                    style = MaterialTheme.typography.bodyLarge
-                )
-            }
+                    Column(
+                        verticalArrangement = Arrangement.spacedBy(8.dp)
+                    ) {
+                        Text(
+                            pizza.name,
+                            style = MaterialTheme.typography.titleLarge
+                        )
+                        Text(
+                            "${stringResource(currentSize.toDescRes())},  ${stringResource(pizza.doughs.first().type.toDescRes())}",
+                            style = MaterialTheme.typography.bodyMedium
+                        )
+                        Text(
+                            ingredients,
+                            style = MaterialTheme.typography.bodyLarge
+                        )
+                    }
 
-            SegmentedSizesControl(
-                pizza.sizes,
-                pizza.sizes.indexOf(pizza.sizes.first { it.type == currentSize }),
-                onItemSelection = { index ->
-                    currentSize = pizza.sizes[index].type
-                    onSizeSelect(index)
+                    SegmentedSizesControl(
+                        pizza.sizes,
+                        pizza.sizes.indexOf(pizza.sizes.first { it.type == currentSize }),
+                        onItemSelection = { index ->
+                            currentSize = pizza.sizes[index].type
+                            onSizeSelect(index)
+                        }
+                    )
+
+                    Text(
+                        stringResource(R.string.pizza_card_add_elements),
+                        style = MaterialTheme.typography.titleSmall
+                    )
                 }
-            )
-
-            Toppings(pizza.toppings)
-        }
-    }
-}
-
-@Composable
-fun Toppings(
-    toppings: List<ToppingUI>,
-    modifier: Modifier = Modifier
-) {
-    Text(
-        stringResource(R.string.pizza_card_add_elements),
-        style = MaterialTheme.typography.titleSmall
-    )
-
-    LazyVerticalGrid(
-        columns = GridCells.Fixed(3),
-        verticalArrangement = Arrangement.spacedBy(8.dp),
-        horizontalArrangement = Arrangement.spacedBy(8.dp),
-        modifier = modifier
-    ) {
-        items(toppings) {
-            PizzaCardTopping(it) { }
+            }
+            items(pizza.toppings, key = { it.type }) {
+                PizzaCardTopping(it) { }
+            }
         }
     }
 }

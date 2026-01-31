@@ -5,11 +5,14 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.application
 import androidx.lifecycle.viewModelScope
 import com.example.card.domain.usecase.GetPizzaCardUseCase
+import com.example.pizza.utils.PizzaDoughs
+import com.example.pizza.utils.PizzaSizes
 import com.example.pizza.utils.toNameRes
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import com.example.card.R as CurrentR
 
 class PizzaCardViewModel(
     application: Application,
@@ -54,4 +57,15 @@ class PizzaCardViewModel(
     fun onSizeSelect(item: Int) {
 
     }
+}
+
+fun PizzaSizes.toDescRes(): Int = when (this) {
+    PizzaSizes.SMALL -> CurrentR.string.pizza_card_size_small
+    PizzaSizes.MEDIUM -> CurrentR.string.pizza_card_size_medium
+    PizzaSizes.LARGE -> CurrentR.string.pizza_card_size_large
+}
+
+fun PizzaDoughs.toDescRes(): Int = when (this) {
+    PizzaDoughs.THIN -> CurrentR.string.pizza_card_dough_thin
+    PizzaDoughs.THICK -> CurrentR.string.pizza_card_dough_thick
 }

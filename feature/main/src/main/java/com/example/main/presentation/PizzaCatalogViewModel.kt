@@ -11,6 +11,7 @@ import kotlinx.coroutines.launch
 class PizzaCatalogViewModel(
     private val getPizzaCatalogUseCase: GetPizzaCatalogUseCase
 ): ViewModel() {
+
     private val _state = MutableStateFlow<PizzaCatalogState>(PizzaCatalogState.Initial)
     val state: StateFlow<PizzaCatalogState> = _state.asStateFlow()
 
@@ -18,7 +19,7 @@ class PizzaCatalogViewModel(
         loadData()
     }
 
-    fun loadData() {
+    private fun loadData() {
         if(_state.value is PizzaCatalogState.Loading || _state.value is PizzaCatalogState.Content)
             return
 

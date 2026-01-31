@@ -1,4 +1,4 @@
-package com.example.pizza_mityushin_shift_2026.app.app
+package com.example.pizza_mityushin_shift_2026.app
 
 import android.app.Application
 import coil.ImageLoader

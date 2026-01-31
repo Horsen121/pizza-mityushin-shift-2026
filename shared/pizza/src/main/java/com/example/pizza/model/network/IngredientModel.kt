@@ -3,7 +3,8 @@ package com.example.pizza.model.network
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class Size(
+data class IngredientModel(
     val type: String,
     val price: Long,
+    val img: String
 )

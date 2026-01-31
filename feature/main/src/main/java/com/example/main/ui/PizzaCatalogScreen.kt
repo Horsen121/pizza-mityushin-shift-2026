@@ -72,7 +72,7 @@ fun PizzaCatalogScreenContent(
 
         LazyColumn {
             if (state is PizzaCatalogState.Content)
-                items(state.pizzaCatalog) {
+                items(state.pizzaCatalog, key = { it.id }) {
                     PizzaListElement(
                         it,
                         onItemClick
