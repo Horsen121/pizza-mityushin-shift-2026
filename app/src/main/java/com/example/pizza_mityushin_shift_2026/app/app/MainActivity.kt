@@ -36,7 +36,7 @@ import androidx.navigation.toRoute
 import com.example.basket.BasketRoute
 import com.example.basket.presentation.BasketScreen
 import com.example.card.PizzaCardRoute
-import com.example.card.presentation.PizzaCardScreen
+import com.example.card.ui.PizzaCardScreen
 import com.example.main.PizzaCatalogRoute
 import com.example.main.ui.PizzaCatalogScreen
 import com.example.orders.OrdersRoute
@@ -46,6 +46,7 @@ import com.example.profile.ProfileRoute
 import com.example.profile.presentation.ProfileScreen
 import com.example.theme.theme.Pizzamityushinshift2026Theme
 import org.koin.androidx.compose.koinViewModel
+import org.koin.core.parameter.parametersOf
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -94,8 +95,8 @@ class MainActivity : ComponentActivity() {
                                 val destination = it.toRoute<PizzaCardRoute>()
 
                                 PizzaCardScreen(
-                                    onBackClick = { navController.navigateUp() }
-//                                    viewModel = koinViewModel { parametersOf(destination.pizzaId) }
+                                    onBackClick = { navController.navigateUp() },
+                                    viewModel = koinViewModel { parametersOf(destination.pizzaId) }
                                 )
                             }
 

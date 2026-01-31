@@ -35,6 +35,7 @@ android {
 dependencies {
     implementation(project(":component:theme"))
     implementation(project(":shared:pizza"))
+    implementation(project(":shared:network"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
@@ -50,6 +51,8 @@ dependencies {
     implementation(libs.material)
     implementation(libs.kotlinx.serialization.json)
     implementation(libs.kotlinx.coroutines.android)
+    implementation(libs.coil.compose)
+    implementation(libs.androidx.compose.material.icons.extended)
 
     // Retrofit
     implementation(libs.retrofit)
@@ -62,4 +65,5 @@ dependencies {
     implementation(platform(libs.koin.bom))
     implementation(libs.koin.core)
     implementation(libs.koin.compose)
+    implementation(libs.androidx.compose.foundation.layout)
 }
