@@ -1,4 +1,4 @@
-package com.example.pizza.model
+package com.example.pizza.model.network
 
 import kotlinx.serialization.Serializable
 

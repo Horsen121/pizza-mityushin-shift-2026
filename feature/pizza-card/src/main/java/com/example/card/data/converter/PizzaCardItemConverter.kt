@@ -1,7 +1,8 @@
 package com.example.card.data.converter
 
 import com.example.card.domain.entity.PizzaCardItem
-import com.example.pizza.model.PizzaItemModel
+import com.example.pizza.model.network.PizzaItemModel
+import com.example.pizza.model.ui.toDomain
 
 class PizzaCardItemConverter {
     fun convert(model: PizzaItemModel): PizzaCardItem {
@@ -9,10 +10,10 @@ class PizzaCardItemConverter {
             id = model.id.toLong(),
             name = model.name,
             description = model.description,
-            ingredients = model.ingredients,
-            toppings = model.toppings,
-            sizes = model.sizes,
-            doughs = model.doughs,
+            ingredients = model.ingredients.toDomain(),
+            toppings = model.toppings.toDomain(),
+            sizes = model.sizes.toDomain(),
+            doughs = model.doughs.toDomain(),
             isNew = model.isNew,
             isHit = model.isHit,
             img = model.img,
