@@ -23,11 +23,7 @@ class PizzaCardViewModel(
     private val _state = MutableStateFlow<PizzaCardState>(PizzaCardState.Initial)
     val state: StateFlow<PizzaCardState> = _state.asStateFlow()
 
-    init {
-        loadData()
-    }
-
-    private fun loadData() {
+    fun loadData() {
         if(_state.value is PizzaCardState.Loading || _state.value is PizzaCardState.Content)
             return
 

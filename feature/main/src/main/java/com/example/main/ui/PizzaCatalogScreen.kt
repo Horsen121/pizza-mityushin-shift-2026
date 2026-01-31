@@ -23,35 +23,42 @@ import com.example.main.R
 import com.example.main.presentation.PizzaCatalogState
 import com.example.main.presentation.PizzaCatalogViewModel
 import com.example.theme.components.TitleText
+import com.example.theme.elements.FullScreenProgressIndicator
 
 @Composable
 fun PizzaCatalogScreen(
     onItemClick: (Long) -> Unit,
     viewModel: PizzaCatalogViewModel
 ) {
+    val context = LocalContext.current
     val state by viewModel.state.collectAsStateWithLifecycle()
-    PizzaCatalogScreenContent(
-        state,
-        onItemClick
-    )
+
+    LaunchedEffect(Unit) {
+        viewModel.loadData()
+    }
+
+    when(val currentState = state) {
+        is PizzaCatalogState.Initial, PizzaCatalogState.Loading -> {
+            FullScreenProgressIndicator()
+        }
+        is PizzaCatalogState.Content -> {
+            PizzaCatalogScreenContent(
+                currentState,
+                onItemClick
+            )
+        }
+        is PizzaCatalogState.Error -> {
+            Toast.makeText(context, currentState.message, Toast.LENGTH_SHORT).show()
+            Log.e("TAG", "PizzaCardScreenContent: ${currentState.message}")
+        }
+    }
 }
 
 @Composable
 fun PizzaCatalogScreenContent(
-    state: PizzaCatalogState,
+    state: PizzaCatalogState.Content,
     onItemClick: (Long) -> Unit,
 ) {
-    val context = LocalContext.current
-    LaunchedEffect(state) {
-        when(state) {
-            is PizzaCatalogState.Error -> {
-                Toast.makeText(context, state.message, Toast.LENGTH_SHORT).show()
-                Log.e("TAG", "PizzaCatalogScreenContent: ${state.message}")
-            }
-            else -> {}
-        }
-    }
-
     Column(
         verticalArrangement = Arrangement.SpaceBetween,
         modifier = Modifier.fillMaxSize()
@@ -66,14 +73,13 @@ fun PizzaCatalogScreenContent(
         }
 
         LazyColumn {
-            if (state is PizzaCatalogState.Content)
-                items(state.pizzaCatalog, key = { it.id }) {
-                    PizzaListElement(
-                        it,
-                        onItemClick
-                    )
-                    Spacer(Modifier.height(20.dp))
-                }
+            items(state.pizzaCatalog, key = { it.id }) {
+                PizzaListElement(
+                    it,
+                    onItemClick
+                )
+                Spacer(Modifier.height(20.dp))
+            }
         }
     }
 }
