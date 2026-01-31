@@ -36,4 +36,5 @@ dependencies {
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
     implementation(libs.kotlinx.serialization.json)
+    api(libs.androidx.compose.material.icons.extended)
 }
