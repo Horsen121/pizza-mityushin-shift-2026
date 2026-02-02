@@ -6,12 +6,11 @@
 
 ## ✨ UI Overview
 <div align="center">
-  <img src="assets/main_screen.png" width="50%" alt="Главный экран">
-  <img src="assets/pizza_card_screen.png" width="50%" alt="Карточка пиццы">
+  <img src="assets/screenshots/main_screen.png" width="48.5%" alt="Главный экран">
+  <img src="assets/screenshots/pizza_card_screen.png" width="49%" alt="Карточка пиццы">
 </div>
 
-
-https://github.com/user-attachments/assets/425a79df-fbfe-41b7-aa51-57e6f11fed09
+<video width="300" height="800" src="https://github.com/user-attachments/assets/425a79df-fbfe-41b7-aa51-57e6f11fed09"></video>
 
 
 
