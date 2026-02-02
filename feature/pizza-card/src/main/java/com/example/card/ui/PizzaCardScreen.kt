@@ -54,7 +54,9 @@ fun PizzaCardScreen(
     onBackClick: () -> Unit,
     destination: PizzaCardRoute
 ) {
-    val viewModel: PizzaCardViewModel = koinViewModel { parametersOf(destination.pizzaId) }
+    val viewModel: PizzaCardViewModel = koinViewModel {
+        parametersOf(destination.pizzaId)
+    }
     val context = LocalContext.current
     val state by viewModel.state.collectAsStateWithLifecycle()
 
@@ -67,7 +69,6 @@ fun PizzaCardScreen(
             is PizzaCardState.Initial, PizzaCardState.Loading -> {
                 FullScreenProgressIndicator()
             }
-
             is PizzaCardState.Content -> {
                 PizzaCardScreenContent(
                     currentState,
@@ -76,7 +77,6 @@ fun PizzaCardScreen(
                     viewModel.getIngredients(state)
                 )
             }
-
             is PizzaCardState.Error -> {
                 Toast.makeText(context, currentState.message, Toast.LENGTH_SHORT).show()
                 Log.e("TAG", "PizzaCardScreen: ${currentState.message}")

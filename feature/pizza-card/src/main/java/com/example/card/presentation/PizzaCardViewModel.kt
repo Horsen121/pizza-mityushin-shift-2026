@@ -50,7 +50,7 @@ class PizzaCardViewModel(
         return ingredients.removeSuffix(", ")
     }
 
-    fun onSizeSelect(item: Int) {
+    fun onSizeSelect(size: Int) {
 
     }
 }
